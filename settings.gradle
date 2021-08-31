@@ -1,0 +1,3 @@
+rootProject.name = "Nativ Maps"
+include ':app'
+include ':Routes'

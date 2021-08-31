@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Nativ Maps</string>
+    <string name="new_route">New Route</string>
+    <string name="browse_routes">Open Route</string>
+    <string name="save">Save</string>
+    <string name="error">Something went wrong</string>
+    <string name="choose_filename_title">Enter Route Name</string>
+    <string name="save_file">Save route</string>
+    <string name="cancel">Cancel</string>
+    <string name="save_succesful">Route Saved</string>
+    <string name="no_routes">We could not find any saved Nativ Maps Routes</string>
+    <string name="import_routes">Import Route</string>
+    <string name="import_failed">File could not be imported</string>
+</resources>

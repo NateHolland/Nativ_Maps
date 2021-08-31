@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="nativ.tech.maps.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_routeEditFragment"
+            app:destination="@id/routeEditFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_browseRoutesFragment"
+            app:destination="@id/browseRoutesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/routeEditFragment"
+        android:name="nativ.tech.maps.RouteEditFragment"
+        android:label="route_edit_fragment"
+        tools:layout="@layout/route_edit_fragment" >
+        <argument
+            android:name="Route"
+            app:argType="nativ.tech.routes.Route" />
+    </fragment>
+    <fragment
+        android:id="@+id/browseRoutesFragment"
+        android:name="nativ.tech.maps.BrowseRoutesFragment"
+        android:label="browse_routes_fragment"
+        tools:layout="@layout/browse_routes_fragment" >
+        <action
+            android:id="@+id/action_browseRoutesFragment_to_routeEditFragment"
+            app:destination="@id/routeEditFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_point">+</string>
+    <string name="duplicate_point">\? / ?</string>
+    <string name="delete_point">X</string>
+</resources>
