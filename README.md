@@ -25,10 +25,10 @@ Add the dependency
 
 ## Usage
 
-
-<nativ.tech.routes.RouteEditView
+	<nativ.tech.routes.RouteEditView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 	
 Add view to your xml layouts
 
