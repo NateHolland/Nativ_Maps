@@ -33,7 +33,9 @@ Add the dependency
 Add view to your xml layouts
 
 To save route use export() and write the output to a file
+
 To open a route use Route.fromFile() to return a route object
+
 To import a gpx route use GeoCalc.importGpx() to return a route object
 
 See the example app for basic implementation.
