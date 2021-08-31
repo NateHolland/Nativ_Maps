@@ -44,7 +44,6 @@ See the example app for basic implementation.
 Contributions are welcome! Please check the issues and open a pull request when done.
 
 ## License
-Copyright 2015 - 2021 Nathan Holland - Nativ
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
