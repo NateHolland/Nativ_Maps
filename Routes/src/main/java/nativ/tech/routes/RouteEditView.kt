@@ -240,4 +240,8 @@ class RouteEditView: ConstraintLayout {
     fun setRouteName(it: String) {
         route.name = it
     }
+
+    fun getRoute(): Route {
+        return route
+    }
 }

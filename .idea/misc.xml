@@ -5,10 +5,11 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.31145833333333334" />
         <entry key="Routes/src/main/res/layout/route_edit_layout.xml" value="0.309375" />
-        <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.3255208333333333" />
+        <entry key="app/src/main/res/drawable-v24/ic_save.xml" value="0.3255208333333333" />
+        <entry key="app/src/main/res/drawable/ic_export.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.309375" />
         <entry key="app/src/main/res/layout/browse_routes_fragment.xml" value="0.309375" />
-        <entry key="app/src/main/res/layout/file_listview.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/file_listview.xml" value="0.22871376811594202" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.309375" />
         <entry key="app/src/main/res/layout/route_edit_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/menu/route_menu.xml" value="0.3645833333333333" />

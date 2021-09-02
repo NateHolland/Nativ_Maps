@@ -6,7 +6,9 @@ open class Event<out T> (private  val content: T){
         ERROR,
         CHOOSE_FILE_NAME,
         SAVE_SUCCESSFUL,
-        IMPORT_FAILED
+        IMPORT_FAILED,
+        EXPORT_FAILED,
+        EXPORT_SUCEEDED
     }
 
     private var hasBeenHandled = false
