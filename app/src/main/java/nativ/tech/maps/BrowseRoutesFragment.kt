@@ -6,20 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import nativ.tech.routes.Route
 
 class BrowseRoutesFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = BrowseRoutesFragment()
-    }
 
     private lateinit var viewModel: BrowseRoutesViewModel
     private lateinit var recyclerView: RecyclerView
@@ -39,13 +32,13 @@ class BrowseRoutesFragment : Fragment() {
         recyclerView = view.findViewById(R.id.route_list)
         recyclerView.layoutManager = LinearLayoutManager(context)
         noFiles = view.findViewById(R.id.noRoutes)
-        viewModel.fileList.observe(viewLifecycleOwner, Observer {
+        viewModel.fileList.observe(viewLifecycleOwner, {
             showFiles(it)
         })
-        viewModel.event.observe(viewLifecycleOwner, Observer {
+        viewModel.event.observe(viewLifecycleOwner, {
             if (it.getContent() == Event.Type.ERROR) showMessage(getString(R.string.error))
         })
-        viewModel.route.observe(viewLifecycleOwner, Observer {
+        viewModel.route.observe(viewLifecycleOwner, {
             it.getContent()?.also { route ->
                 val action = BrowseRoutesFragmentDirections.actionBrowseRoutesFragmentToRouteEditFragment(route)
                 view.findNavController().navigate(action)

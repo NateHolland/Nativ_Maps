@@ -11,4 +11,8 @@
     <string name="no_routes">We could not find any saved Nativ Maps Routes</string>
     <string name="import_routes">Import Route</string>
     <string name="import_failed">File could not be imported</string>
+    <string name="export">Export</string>
+    <string name="failed_create_file">Unable to create File</string>
+    <string name="gpx_export_failed">Could not export to GPX</string>
+    <string name="gpx_export_succeeded">"GPX export succesfull "</string>
 </resources>

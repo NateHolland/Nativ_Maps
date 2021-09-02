@@ -3,11 +3,9 @@ package nativ.tech.routes
 import android.graphics.Point
 import android.graphics.PointF
 import android.location.Location
-import android.os.Parcelable
 import android.util.Log
+import android.util.Xml
 import io.ticofab.androidgpxparser.parser.GPXParser
-import io.ticofab.androidgpxparser.parser.domain.Gpx
-import io.ticofab.androidgpxparser.parser.domain.TrackPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.osmdroid.api.IGeoPoint
@@ -15,8 +13,8 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.Projection
 import org.xmlpull.v1.XmlPullParserException
+import org.xmlpull.v1.XmlSerializer
 import java.io.*
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -51,6 +49,53 @@ class GeoCalc {
                 imported
             }
 
+        }
+
+        suspend fun exportGpx(outputStream: OutputStream?, route: Route): Boolean {
+            return withContext(Dispatchers.IO){
+                var success = false
+                outputStream?.also { stream ->
+                    val writer = StringWriter()
+                    Xml.newSerializer().run {
+                        setOutput(writer)
+                        startDocument("UTF-8",null)
+                        startTag(null, "gpx")
+                        attribute(null,"creator","Nativ Maps")
+                        attribute(null,"xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance")
+                        attribute(null,"xsi:schemaLocation","http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd")
+                        attribute(null,"version","1.1")
+                        attribute(null,"xmlns","http://www.topografix.com/GPX/1/1")
+                        startTag(null,"metadata")
+                        startTag(null,"time")
+                        text(SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'").also { it.timeZone = TimeZone.getTimeZone("UTC") }.format(Date()))
+                        endTag(null,"time")
+                        endTag(null,"metadata")
+                        startTag(null,"trk")
+                        startTag(null,"name")
+                        route.name?:"Nativ Maps Route: ${SimpleDateFormat("dd/M/yyyy hh:mm:ss").format(Date())}.gpx"
+                        endTag(null,"name")
+                        startTag(null,"trkseg")
+                        route.path.forEach { point->
+                            startTag(null,"trkpt")
+                            attribute(null,"lat","${point.latitude}")
+                            attribute(null,"lon","${point.longitude}")
+                            startTag(null,"ele")
+                            text("${point.altitude}")
+                            endTag(null,"ele")
+                            endTag(null,"trkpt")
+                        }
+                        endTag(null,"trkseg")
+                        endTag(null,"trk")
+                        endTag(null,"gpx")
+                        endDocument()
+                        flush()
+                    }
+                    stream.write(writer.toString().toByteArray())
+                    stream.close()
+                    success = true
+                }
+                success
+            }
         }
 
         private fun location(latitude: Double, longitude: Double, time: Long): Location {

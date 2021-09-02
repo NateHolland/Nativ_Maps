@@ -66,7 +66,6 @@ class HomeFragment : Fragment() {
         uri?.also {
             viewModel.importRoute(context?.contentResolver?.openInputStream(uri))
         }?:importFailed()
-
     }
 
     private fun importFailed() {

@@ -2,13 +2,16 @@ package nativ.tech.maps
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.InputType
+import android.util.Log
 import android.view.*
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -49,6 +52,8 @@ class RouteEditFragment : Fragment() {
                 Event.Type.ERROR -> showMessage(getString(R.string.error))
                 Event.Type.CHOOSE_FILE_NAME -> chooseFileNameDialog()
                 Event.Type.SAVE_SUCCESSFUL -> showMessage(getString(R.string.save_succesful))
+                Event.Type.EXPORT_FAILED -> showMessage(getString(R.string.gpx_export_failed))
+                Event.Type.EXPORT_SUCEEDED -> showMessage(getString(R.string.gpx_export_succeeded))
             }
         })
         setRoute(args.route)
@@ -68,8 +73,17 @@ class RouteEditFragment : Fragment() {
                 viewModel.save(routeEditView.export())
                 true
             }
+            R.id.action_export -> {
+                exportGPX.launch(viewModel.getRouteName())
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+    private val exportGPX = registerForActivityResult(ActivityResultContracts.CreateDocument()) { uri: Uri? ->
+        uri?.also {
+            viewModel.exportGPX(context?.contentResolver?.openOutputStream(uri),routeEditView.getRoute())
+        }?:showMessage(getString(R.string.failed_create_file))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
