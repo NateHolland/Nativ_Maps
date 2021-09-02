@@ -40,13 +40,10 @@ class BrowseRoutesFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         noFiles = view.findViewById(R.id.noRoutes)
         viewModel.fileList.observe(viewLifecycleOwner, Observer {
-            if(it.isEmpty())noFiles()
-            else showFiles(it)
+            showFiles(it)
         })
         viewModel.event.observe(viewLifecycleOwner, Observer {
-            when(it.getContent()) {
-                Event.Type.ERROR -> showMessage(getString(R.string.error))
-            }
+            if (it.getContent() == Event.Type.ERROR) showMessage(getString(R.string.error))
         })
         viewModel.route.observe(viewLifecycleOwner, Observer {
             it.getContent()?.also { route ->
@@ -60,7 +57,11 @@ class BrowseRoutesFragment : Fragment() {
         fun openFile(s: String) {
             viewModel.openFile(s)
         }
-        recyclerView.adapter = StringAdapter(files,::openFile)
+        fun deleteFile(s: String) {
+            viewModel.deleteFile(s)
+        }
+        recyclerView.adapter = StringAdapter(files,::openFile,::deleteFile)
+        if(files.isEmpty())noFiles()
     }
 
     private fun noFiles() {

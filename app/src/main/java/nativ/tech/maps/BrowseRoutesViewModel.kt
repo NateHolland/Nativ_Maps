@@ -44,4 +44,11 @@ class BrowseRoutesViewModel(application: Application) : AndroidViewModel(applica
         fileList.value = emptyList()
     }
 
+    fun deleteFile(fileName: String){
+        routesFolder()?.also { folder ->
+            if(File("$folder/$fileName").delete())populate()
+            else error()
+        }?:error()
+    }
+
 }
