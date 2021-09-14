@@ -19,10 +19,6 @@ import nativ.tech.routes.Route
 
 class HomeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
     private lateinit var viewModel: HomeViewModel
     private lateinit var progressBar: ContentLoadingProgressBar
 
@@ -61,7 +57,7 @@ class HomeFragment : Fragment() {
             }
         })
     }
-    val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         progressBar.show()
         uri?.also {
             viewModel.importRoute(context?.contentResolver?.openInputStream(uri))
