@@ -33,12 +33,13 @@ Add the dependency
 Add view to your xml layouts
 
 To save route use export() and write the output to a file
-
 To open a route use Route.fromFile() to return a route object
 
 To import a gpx route use GeoCalc.importGpx() to return a route object
+To export a gpx route use GeoCalc.exportGpx() 
 
 See the example app for basic implementation.
+App can also be downloaded from [Google Play](https://play.google.com/store/apps/details?id=nativ.tech.maps)
 
 ## Contribute
 Contributions are welcome! Please check the issues and open a pull request when done.
